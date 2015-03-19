@@ -15,5 +15,7 @@ $container = $factory->create(function(ContainerBuilder $container, LoaderInterf
     //$container->addCompilerPass(...);
 });
 
-// use services from the container
-var_dump($container->get('test')); exit;
+$catApi = new \CatApi\CatApi();
+
+echo 'URL for cat gif with id "vd": ' . $catApi->getCatGifUrl('vd') . "\n";
+echo 'A random URL of a cat gif: ' . $catApi->getRandomCatGifUrl() . "\n";
