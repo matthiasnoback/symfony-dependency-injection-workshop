@@ -1,0 +1,12 @@
+{
+    "require": {
+        "symfony/yaml": "~2.3",
+        "symfony/dependency-injection": "~2.3",
+        "symfony/config": "~2.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}
