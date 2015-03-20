@@ -1,0 +1,5 @@
+services:
+    dummy_observer:
+        class: CatApi\DummyObserver
+        tags:
+            - { name: cat_api.new_url_observer }
