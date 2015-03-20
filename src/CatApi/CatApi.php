@@ -6,9 +6,15 @@ class CatApi implements CatApiInterface
 {
     private $httpClient;
 
-    public function __construct(HttpClientInterface $httpClient)
+    /**
+     * @var NewUrlObserver[]
+     */
+    private $observers;
+
+    public function __construct(HttpClientInterface $httpClient, array $observers)
     {
         $this->httpClient = $httpClient;
+        $this->observers = $observers;
     }
 
     public function getCatGifUrl($id)
@@ -21,7 +27,10 @@ class CatApi implements CatApiInterface
 
         $url = (string)$responseElement->data->images[0]->image->url;
 
-        $this->prefetchGifFile($url, __DIR__ . '/../../cache/' . $id . '.gif');
+        foreach ($this->observers as $observer) {
+            $observer->notify($url);
+        }
+
         return $url;
     }
 
@@ -35,15 +44,10 @@ class CatApi implements CatApiInterface
 
         $url = (string)$responseElement->data->images[0]->image->url;
 
-        $this->prefetchGifFile($url, __DIR__ . '/../../cache/random.gif');
-        return $url;
-    }
+        foreach ($this->observers as $observer) {
+            $observer->notify($url);
+        }
 
-    private function prefetchGifFile($url, $target)
-    {
-        file_put_contents(
-            $target,
-            $this->httpClient->get($url)
-        );
+        return $url;
     }
 }

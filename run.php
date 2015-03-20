@@ -18,9 +18,6 @@ $container = $factory->create(function(ContainerBuilder $container, LoaderInterf
 });
 
 $catApi = $container->get('cat_api');
-var_dump($catApi);
 
-//$catApi = new CatApi();
-//
-//echo 'URL for cat gif with id "vd": ' . $catApi->getCatGifUrl('vd') . "\n";
-//echo 'A random URL of a cat gif: ' . $catApi->getRandomCatGifUrl() . "\n";
+echo 'URL for cat gif with id "vd": ' . $catApi->getCatGifUrl('vd') . "\n";
+echo 'A random URL of a cat gif: ' . $catApi->getRandomCatGifUrl() . "\n";

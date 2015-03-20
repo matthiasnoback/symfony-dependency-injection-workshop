@@ -1,15 +1,22 @@
 services:
-#    http_client:
-#        class: ...
+    http_client:
+        class: CatApi\FileGetContentsHttpClient
+        public: false
 
     cat_api:
         alias: cached_cat_api
 
+    prefetch_gif_observer:
+        class: CatApi\PrefetchGifObserver
+        arguments:
+            - @http_client
+
     real_cat_api:
         class: CatApi\CatApi
         public: false
-#        arguments:
-#            - @http_client
+        arguments:
+            - @http_client
+            - [@prefetch_gif_observer]
 
     cached_cat_api:
         class: CatApi\CachedCatApi
