@@ -6,7 +6,8 @@ By Matthias Noback
 
 Clone this project:
 
-    git@github.com:matthiasnoback/symfony-dependency-injection-workshop.git
+    git clone git@github.com:matthiasnoback/symfony-dependency-injection-workshop.git
+    cd symfony-dependency-injection-workshop
 
 Install [Composer](https://getcomposer.org/download/) if you don't have it already.
 
@@ -20,5 +21,5 @@ Try:
 
 You should see something like:
 
-    class stdClass#3 (0) {
-    }
+    URL for cat gif with id "vd": http://24.media.tumblr.com/tumblr_m1pgmg9Fe61qjahcpo1_1280.jpg
+    A random URL of a cat gif: http://24.media.tumblr.com/tumblr_m2kkonCfCa1qejbiro1_500.jpg
