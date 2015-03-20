@@ -18,7 +18,6 @@ $container = $factory->create(function(ContainerBuilder $container, LoaderInterf
 });
 
 $catApi = $container->get('cat_api');
-$realCatApi = $container->get('real_cat_api');
 var_dump($catApi);
 
 //$catApi = new CatApi();

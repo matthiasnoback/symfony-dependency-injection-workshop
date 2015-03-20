@@ -1,10 +1,15 @@
 services:
+#    http_client:
+#        class: ...
+
     cat_api:
         alias: cached_cat_api
 
     real_cat_api:
         class: CatApi\CatApi
         public: false
+#        arguments:
+#            - @http_client
 
     cached_cat_api:
         class: CatApi\CachedCatApi

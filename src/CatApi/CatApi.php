@@ -4,9 +4,16 @@ namespace CatApi;
 
 class CatApi implements CatApiInterface
 {
+    private $httpClient;
+
+    public function __construct(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
+
     public function getCatGifUrl($id)
     {
-        $responseXml = @file_get_contents('http://thecatapi.com/api/images/get?format=xml&image_id=' . $id);
+        $responseXml = $this->httpClient->get('http://thecatapi.com/api/images/get?format=xml&image_id=' . $id);
         if (!$responseXml) {
             return 'http://my-cool-website.com/default.gif';
         }
@@ -20,7 +27,7 @@ class CatApi implements CatApiInterface
 
     public function getRandomCatGifUrl()
     {
-        $responseXml = @file_get_contents('http://thecatapi.com/api/images/get?format=xml');
+        $responseXml = $this->httpClient->get('http://thecatapi.com/api/images/get?format=xml');
         if (!$responseXml) {
             return 'http://my-cool-website.com/default.gif';
         }
@@ -36,7 +43,7 @@ class CatApi implements CatApiInterface
     {
         file_put_contents(
             $target,
-            file_get_contents($url)
+            $this->httpClient->get($url)
         );
     }
 }
