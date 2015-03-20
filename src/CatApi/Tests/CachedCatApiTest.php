@@ -17,15 +17,16 @@ class CachedCatApiTest extends \PHPUnit_Framework_TestCase
      */
     private $catApi;
 
+    private $tempDir;
+
     protected function setUp()
     {
-        @unlink(__DIR__ . '/../../../cache/random');
-        @unlink(__DIR__ . '/../../../cache/random.gif');
-        @unlink(__DIR__ . '/../../../cache/vd');
-        @unlink(__DIR__ . '/../../../cache/vd.gif');
+        $this->tempDir = sys_get_temp_dir();
+        @unlink($this->tempDir . '/random');
+        @unlink($this->tempDir . '/vd');
 
         $this->catApi = $this->getMock('CatApi\CatApiInterface');
-        $this->cachedCatApi = new CachedCatApi($this->catApi);
+        $this->cachedCatApi = new CachedCatApi($this->catApi, $this->tempDir);
     }
 
     /**
@@ -42,7 +43,7 @@ class CachedCatApiTest extends \PHPUnit_Framework_TestCase
         $actualUrl = $this->cachedCatApi->getCatGifUrl('vd');
 
         $this->assertSame('the-url', $actualUrl);
-        $this->assertSame('the-url', file_get_contents(__DIR__ . '/../../../cache/vd'));
+        $this->assertSame('the-url', file_get_contents($this->tempDir . '/vd'));
     }
 
     /**

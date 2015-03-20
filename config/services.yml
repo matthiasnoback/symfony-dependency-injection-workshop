@@ -25,3 +25,4 @@ services:
         public: false
         arguments:
             - @real_cat_api
+            - %root_dir%/cache
