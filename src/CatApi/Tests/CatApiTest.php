@@ -9,7 +9,9 @@ class CatApiTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         @unlink(__DIR__ . '/../../../cache/random');
+        @unlink(__DIR__ . '/../../../cache/random.gif');
         @unlink(__DIR__ . '/../../../cache/vd');
+        @unlink(__DIR__ . '/../../../cache/vd.gif');
     }
 
     /**
@@ -22,6 +24,12 @@ class CatApiTest extends \PHPUnit_Framework_TestCase
         $actualUrl = $catApi->getCatGifUrl('vd');
 
         $this->assertSame('http://24.media.tumblr.com/tumblr_m1pgmg9Fe61qjahcpo1_1280.jpg', $actualUrl);
+
+        // it downloads a copy of the image as well
+        $this->assertSame(
+            file_get_contents(__DIR__ . '/fixtures/vd.gif'),
+            file_get_contents(__DIR__ . '/../../../cache/vd.gif')
+        );
     }
 
     /**
@@ -53,6 +61,8 @@ class CatApiTest extends \PHPUnit_Framework_TestCase
         $actualUrl = $catApi->getRandomCatGifUrl();
 
         $this->assertTrue(filter_var($actualUrl, FILTER_VALIDATE_URL) !== false);
+
+        $this->assertFileExists(__DIR__ . '/../../../cache/random.gif');
     }
 
     /**
@@ -67,7 +77,7 @@ class CatApiTest extends \PHPUnit_Framework_TestCase
         $secondRandomUrl = $catApi->getRandomCatGifUrl();
 
         // we've exceeded 5 seconds now
-        sleep(3);
+        sleep(2);
 
         $thirdRandomUrl = $catApi->getRandomCatGifUrl();
         $this->assertSame($firstRandomUrl, $secondRandomUrl);
