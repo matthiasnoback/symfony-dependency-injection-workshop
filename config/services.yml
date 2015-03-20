@@ -1,3 +1,13 @@
 services:
-    test:
-        class: stdClass
+    cat_api:
+        alias: cached_cat_api
+
+    real_cat_api:
+        class: CatApi\CatApi
+        public: false
+
+    cached_cat_api:
+        class: CatApi\CachedCatApi
+        public: false
+        arguments:
+            - @real_cat_api

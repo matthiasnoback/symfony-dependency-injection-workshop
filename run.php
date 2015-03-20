@@ -17,7 +17,11 @@ $container = $factory->create(function(ContainerBuilder $container, LoaderInterf
     //$container->addCompilerPass(...);
 });
 
-$catApi = new CatApi();
+$catApi = $container->get('cat_api');
+$realCatApi = $container->get('real_cat_api');
+var_dump($catApi);
 
-echo 'URL for cat gif with id "vd": ' . $catApi->getCatGifUrl('vd') . "\n";
-echo 'A random URL of a cat gif: ' . $catApi->getRandomCatGifUrl() . "\n";
+//$catApi = new CatApi();
+//
+//echo 'URL for cat gif with id "vd": ' . $catApi->getCatGifUrl('vd') . "\n";
+//echo 'A random URL of a cat gif: ' . $catApi->getRandomCatGifUrl() . "\n";
