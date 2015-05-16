@@ -3,8 +3,8 @@
         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
         colors="true">
     <testsuites>
-        <testsuite name="Dependency injection workshop test suite">
-            <directory>src/*/Tests</directory>
+        <testsuite name="Project test suite">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <filter>
