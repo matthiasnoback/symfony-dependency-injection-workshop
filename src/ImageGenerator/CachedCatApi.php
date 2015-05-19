@@ -8,13 +8,14 @@ class CachedCatApi
     {
         $cache = new CatApiCache();
 
-        if ($cache->containsNoRandomImage()) {
-            $catApi = new CatApi();
-            $url = $catApi->getRandomImage();
-            $cache->storeRandomImage($url);
-            return $url;
-        } else {
+        if ($cache->containsRandomImage()) {
             return $cache->retrieveRandomImage();
         }
+
+        $catApi = new CatApi();
+        $url = $catApi->getRandomImage();
+        $cache->storeRandomImage($url);
+
+        return $url;
     }
 }

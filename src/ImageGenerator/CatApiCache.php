@@ -4,9 +4,9 @@ namespace ImageGenerator;
 
 class CatApiCache
 {
-    public function containsNoRandomImage()
+    public function containsRandomImage()
     {
-        return !file_exists(__DIR__ . '/../../cache/random') || time() - filemtime(__DIR__ . '/../../cache/random') > 3;
+        return file_exists(__DIR__ . '/../../cache/random') && time() - filemtime(__DIR__ . '/../../cache/random') <= 3;
     }
 
     public function storeRandomImage($url)
